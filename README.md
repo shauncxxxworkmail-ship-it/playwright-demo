@@ -1,6 +1,10 @@
 # Playwright TypeScript Test Automation Framework (POM)
 
-[![Playwright Tests](https://github.com)](https://github.com)
+[![Playwright Tests](https://github.com/shauncxxxworkmail-ship-it/playwright-demo)](https://github.com/shauncxxxworkmail-ship-it/playwright-demo)
+
+## 📊 Live Automation Dashboard
+👉 **[View Interactive Playwright HTML Report](https://Shaun.github.io/playwright-demo/)**
+
 
 A professional test automation repository implementing the **Page Object Model (POM)** design pattern using **Playwright** and **TypeScript**. Fully integrated with **GitHub Actions** for robust, multi-browser continuous integration (CI) testing.
 
