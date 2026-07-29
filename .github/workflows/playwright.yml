@@ -38,9 +38,9 @@ jobs:
       if: github.ref != 'refs/heads/main'
       run: npx playwright test --grep @smoke
 
-    # Automated deployment of test reports to GitHub Pages
+    # 💡 Key highlight: Regardless of whether the test succeeds or fails, the latest HTML report will be published to the gh-pages branch.
     - name: Deploy Test Report to GitHub Pages
-      if: always()
+      if: always() # Ensure that reports are uploaded even when tests fail, facilitating remote asynchronous troubleshooting.
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
