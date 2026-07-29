@@ -1,5 +1,5 @@
 ## 📊 Live Automation Dashboard
-👉 **[View Interactive Playwright HTML Report](https://shauncxxxworkmail-ship-it.github.io/playwright-demo/)**
+👉 **[View Interactive Playwright HTML Report](https://shaun.github.io/playwright-demo/)**
 
 # Playwright TypeScript Test Automation Framework (POM)
 
