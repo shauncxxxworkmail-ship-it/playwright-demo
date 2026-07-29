@@ -31,12 +31,12 @@ jobs:
     # 💡 Strategy 1: If the triggering event pushes to the main branch, execute a full regression test.
     - name: Run Full Regression Tests (Main Branch Only)
       if: github.ref == 'refs/heads/main'
-      run: npx playwright test --grep @regression
+      run: ENV=staging npx playwright test --grep @regression
 
     # 💡 Strategy 2: For other development branches (such as dev, feature) or pull requests, only run quick smoke tests.
     - name: Run Quick Smoke Tests (Dev Branches / PRs)
       if: github.ref != 'refs/heads/main'
-      run: npx playwright test --grep @smoke
+      run: ENV=staging npx playwright test --grep @smoke
 
     # 💡 Key highlight: Regardless of whether the test succeeds or fails, the latest HTML report will be published to the gh-pages branch.
     - name: Deploy Test Report to GitHub Pages

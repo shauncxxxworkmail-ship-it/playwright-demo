@@ -8,7 +8,7 @@ test.describe('SauceDemo Login Automation (POM)', () => {
   test('Success Login - Happy Path [CASE-101] @smoke', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigateToLogin();
-    await loginPage.login('standard_user', 'secret_sauce');
+    await loginPage.login(process.env.TEST_USER!, process.env.TEST_PASSWORD!);
     await expect(page.locator('.title')).toHaveText('Products');
   });
 

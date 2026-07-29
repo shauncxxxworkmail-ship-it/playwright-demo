@@ -1,5 +1,10 @@
-/// <reference types="node" />
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+
+// Based on the ENV variable input from the terminal, dynamically read the corresponding .env file.
+const environment = process.env.ENV || 'staging'; // Default is staging.
+dotenv.config({ path: path.resolve(__dirname, `.env.${environment}`) });
 
 export default defineConfig({
   testDir: './tests',
@@ -12,7 +17,8 @@ export default defineConfig({
     ['list']
   ],
   use: {
-    baseURL: 'https://saucedemo.com',
+    // Use environment variables instead of hardcoding the URL!
+    baseURL: process.env.BASE_URL, 
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
