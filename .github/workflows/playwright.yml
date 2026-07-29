@@ -1,11 +1,10 @@
 name: Playwright Tests with Automated Reporting
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, dev, feature/* ] # 💡 Monitor changes on all development branches
   pull_request:
     branches: [ main, master ]
 
-# 💡 Grant cloud servers permission to deploy static web pages.
 permissions:
   contents: write
   pages: write
@@ -29,17 +28,22 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    # 💡 Execute our complete test cases.
-    - name: Run Playwright tests
-      run: npx playwright test
+    # 💡 Strategy 1: If the triggering event pushes to the main branch, execute a full regression test.
+    - name: Run Full Regression Tests (Main Branch Only)
+      if: github.ref == 'refs/heads/main'
+      run: npx playwright test --grep @regression
 
-    # 💡 Key highlight: Regardless of whether the test succeeds or fails, the latest HTML report will be published to the gh-pages branch.
+    # 💡 Strategy 2: For other development branches (such as dev, feature) or pull requests, only run quick smoke tests.
+    - name: Run Quick Smoke Tests (Dev Branches / PRs)
+      if: github.ref != 'refs/heads/main'
+      run: npx playwright test --grep @smoke
+
+    # Automated deployment of test reports to GitHub Pages
     - name: Deploy Test Report to GitHub Pages
-      if: always() # Ensure that reports are uploaded even when tests fail, facilitating remote asynchronous troubleshooting.
+      if: always()
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./playwright-report
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@://github.com'
-
