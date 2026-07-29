@@ -19,6 +19,7 @@ export default defineConfig({
   use: {
     // Use environment variables instead of hardcoding the URL!
     baseURL: process.env.BASE_URL, 
+    headless: process.env.CI ? true : false,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
